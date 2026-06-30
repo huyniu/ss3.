@@ -17,7 +17,20 @@ public class EnrollmentService {
         this.enrollmentRepository = enrollmentRepository;
     }
 
-    public List<Enrollment> getAllEnrollments() {
-        return enrollmentRepository.findAll();
+    public List<Enrollment> getAllEnrollments() { return enrollmentRepository.findAll(); }
+
+    public Enrollment getEnrollmentById(int id) { return enrollmentRepository.findById(id); }
+
+    public Enrollment createEnrollment(Enrollment enrollment) { return enrollmentRepository.create(enrollment); }
+
+    public Enrollment updateEnrollment(int id, Enrollment enrollment) { return enrollmentRepository.update(id, enrollment); }
+
+    public Enrollment deleteEnrollmentById(int id) {
+        Enrollment existing = enrollmentRepository.findById(id);
+        if (existing != null) {
+            enrollmentRepository.deleteById(id);
+            return existing;
+        }
+        return null;
     }
 }

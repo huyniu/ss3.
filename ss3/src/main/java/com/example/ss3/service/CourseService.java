@@ -17,7 +17,20 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public List<Course> getAllCourses() {
-        return courseRepository.findAll();
+    public List<Course> getAllCourses() { return courseRepository.findAll(); }
+
+    public Course getCourseById(int id) { return courseRepository.findById(id); }
+
+    public Course createCourse(Course course) { return courseRepository.create(course); }
+
+    public Course updateCourse(int id, Course course) { return courseRepository.update(id, course); }
+
+    public Course deleteCourseById(int id) {
+        Course existingCourse = courseRepository.findById(id);
+        if (existingCourse != null) {
+            courseRepository.deleteById(id);
+            return existingCourse;
+        }
+        return null;
     }
 }
