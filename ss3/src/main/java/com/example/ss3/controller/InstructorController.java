@@ -57,7 +57,7 @@ public class InstructorController {
         ApiResponse<Instructor> response = new ApiResponse<>(false, "Instructor not found to update", null);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Instructor>> delete(@PathVariable int id) {
         Instructor deletedInstructor = instructorService.deleteInstructorById(id);

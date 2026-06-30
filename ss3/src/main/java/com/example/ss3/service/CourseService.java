@@ -17,20 +17,27 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public List<Course> getAllCourses() { return courseRepository.findAll(); }
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
+    }
 
-    public Course getCourseById(int id) { return courseRepository.findById(id); }
+    // Gọi findById của Repo và ném ngoại lệ nếu không có dữ liệu
+    public Course getCourseById(int id) {
+        return courseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+    }
 
-    public Course createCourse(Course course) { return courseRepository.create(course); }
+    public Course createCourse(Course course) {
+        return courseRepository.create(course);
+    }
 
-    public Course updateCourse(int id, Course course) { return courseRepository.update(id, course); }
+    // Hàm update ở Repo đã tự xử lý lỗi, nên ta chỉ cần gọi trực tiếp
+    public Course updateCourse(int id, Course course) {
+        return courseRepository.update(id, course);
+    }
 
-    public Course deleteCourseById(int id) {
-        Course existingCourse = courseRepository.findById(id);
-        if (existingCourse != null) {
-            courseRepository.deleteById(id);
-            return existingCourse;
-        }
-        return null;
+    // Hàm delete ở Repo cũng tự xử lý lỗi
+    public void deleteCourseById(int id) {
+        courseRepository.deleteById(id);
     }
 }

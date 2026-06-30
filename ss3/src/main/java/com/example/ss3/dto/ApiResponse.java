@@ -11,6 +11,9 @@ public class ApiResponse<T> {
         this.message = message;
         this.data = data;
     }
+    public static <T> ApiResponse<T> error(String message) {
+        return new ApiResponse<>(false, message, null);
+    }
 
     // --- BẮT BUỘC CÓ GETTER VÀ SETTER ĐỂ PARSE JSON ---
     public boolean isSuccess() {
